@@ -8,93 +8,98 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Kalkulator1
+namespace CalculatorApp
 {
     public partial class Form1 : Form
     {
+        double resultValue = 0;
+        string operationPerformed = "";
+        bool isOperationPerformed = false;
+
         public Form1()
         {
             InitializeComponent();
         }
 
+        private void button_click(object sender, EventArgs e)
+        {
+            if (tbDisplayResult.Text == "0" || (isOperationPerformed))
+                tbDisplayResult.Clear();
+
+            isOperationPerformed = false;
+
+            Button button = (Button)sender;
+
+            //validation on deciamls more than 1
+            if (button.Text == ".")
+            {
+                if (!tbDisplayResult.Text.Contains("."))
+                    tbDisplayResult.Text += button.Text;
+            }
+            else {
+                tbDisplayResult.Text += button.Text;
+            }
+
+            
+
+        }
+
+        private void operator_click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+
+            operationPerformed = button.Text;
+            resultValue = Double.Parse(tbDisplayResult.Text);
+            lbCurrentOp.Text = resultValue + " " + operationPerformed;
+            isOperationPerformed =true;
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            tbDisplayResult.Text = "0";
+            resultValue = 0;
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            tbDisplayResult.Text = "0";
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            if (operationPerformed == "+")
+            {
+                tbDisplayResult.Text = (resultValue + double.Parse(tbDisplayResult.Text)).ToString();
+            }
+            else if (operationPerformed == "-")
+            {
+                tbDisplayResult.Text = (resultValue - double.Parse(tbDisplayResult.Text)).ToString();
+            }
+            else if (operationPerformed == "X")
+            {
+                tbDisplayResult.Text = (resultValue * double.Parse(tbDisplayResult.Text)).ToString();
+            }
+            else {
+                tbDisplayResult.Text = (resultValue / double.Parse(tbDisplayResult.Text)).ToString();
+            }
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            if (tbDisplayResult.Text.Length > 0)
+                tbDisplayResult.Text = tbDisplayResult.Text.Remove(tbDisplayResult.Text.Length - 1, 1);
+
+            if (tbDisplayResult.Text == "")
+                tbDisplayResult.Text = "0";
+        }
+
+        private void tbDisplayResult_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            int nilai1 = int.Parse(textBox2.Text);
-            int nilai2 = int.Parse(textBox3.Text);
-            int hasil;
-            hasil = nilai1 + nilai2;
-            textBox4.Text = hasil.ToString();
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            textBox2.Text = "";
-            textBox3.Text = "";
-            textBox4.Text = "";
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            int nilai1 = int.Parse(textBox2.Text);
-            int nilai2 = int.Parse(textBox3.Text);
-            int hasil;
-            hasil = nilai1 - nilai2;
-            textBox4.Text = hasil.ToString();
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            int nilai1 = int.Parse(textBox2.Text);
-            int nilai2 = int.Parse(textBox3.Text);
-            int hasil;
-            hasil = nilai1 * nilai2;
-            textBox4.Text = hasil.ToString();
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            int nilai1 = int.Parse(textBox2.Text);
-            int nilai2 = int.Parse(textBox3.Text);
-            int hasil;
-            hasil = nilai1 / nilai2;
-            textBox4.Text = hasil.ToString();
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
         {
 
         }
